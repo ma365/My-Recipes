@@ -1,0 +1,29 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+{{if 'message' in globals():}}
+<h3>{{=message}}</h3>
+{{=error}}
+{{pass}}
+
+<h1>List all recipes</h1>
+{{=form}}
+<table>
+{{for recipe in records:}}
+<tr>
+<td>{{=A(recipe.title,_href=URL('show?id=%s'%recipe.id))}}</td>
+<td>{{=recipe.created_on}}</td>
+</tr>
+{{pass}}
+</table>
+{{=A('create new recipe',_href=URL('new_recipe'))}}
+<h2>
+    Contact Form
+</h2>
+
+{{=LOAD('default','contactform.load',ajax=True)}}
+
+
+{{block right_sidebar}}
+{{=LOAD('default','contactform.load',ajax=True)}}
+{{end}}

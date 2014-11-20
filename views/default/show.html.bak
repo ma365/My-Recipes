@@ -1,0 +1,24 @@
+{{extend 'layout.html'}}
+
+<h1>{{=recipe.title}}</h1>
+<p>{{=XML(recipe.description)}}</p>
+Posted on {{=recipe.created_on}}<br/><br/>
+<p>{{=XML*(recipe.instructions)}}</p>
+{{if len(comments):}}
+<h2>Comments</h2><br /><p>
+
+{{for post in comments:}}
+
+<p>{{=post.author}} says <i>{{=post.body}}</i></p>
+
+{{pass}}</p>overview 103
+
+{{else:}}
+
+<span class="alert">No comments posted yet</span>
+
+{{pass}}
+
+<h2>Post a comment</h2>
+
+{{=form}}

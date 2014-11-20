@@ -1,0 +1,8 @@
+{{extend 'layout.html'}}
+<h1>What is your name?</h1>
+{{=form}}
+<ul>
+{{for image in images:}}
+{{=LI(A(image.title, _href=URL("show", args=image.id)))}}
+{{pass}}
+</ul>
