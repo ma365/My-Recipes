@@ -1,0 +1,24 @@
+{{extend 'layout.html'}}
+<h1>All Recipes</h1>
+<div id="all_recipes" class="row">
+{{for recipe in rows:}}
+    <div class="span3">
+        <a href="{{=URL('show', args=recipe.id)}}"><img src="{{=URL('download', args=recipe.image)}}" /></a>
+    <h5>{{=A(recipe.title,_href=URL('show', args=recipe.id))}}</h5>
+        <p>Created by {{=db.auth_user[recipe.created_by].first_name}} on {{=recipe.created_on}}</p>
+
+    </div>
+{{pass}}
+
+<div class="pagination span12">
+  <ul>
+      {{if page:}}
+    <li><a href="{{=URL(args=[page-1])}}">Prev</a></li>
+      {{pass}}
+      {{if len(rows)>items_per_page:}}
+    <li><a href="{{=URL(args=[page+1])}}">Next</a></li>
+      {{pass}}
+  </ul>
+</div>
+
+</div>

@@ -12,15 +12,16 @@ db.define_table('category',Field('name'))
 
 db.define_table('recipe',
                 Field('title'),
+                Field('image', 'upload'),
                 Field('description', length=256),
                 Field('category', db.category),
                 Field('created_on', 'datetime', default=request.now),
-                Field('created_by', 'reference auth_user', default=auth.user_id),                
-                Field('time_for_preparation','integer'),
-                Field('number_of_portions','integer'),
+                Field('created_by', 'reference auth_user', default=auth.user_id),
+                Field('time_for_preparation'),
+                Field('time_for_cooking'),
+                Field('number_of_portions'),
                 Field('ingredients', 'text'),
-                Field('preparation', 'text'),
-                Field('instructions', 'text')
+                Field('directions', 'text')
                 )
 
 db.define_table('attachment',
@@ -45,6 +46,8 @@ db.recipe.description.requires=IS_NOT_EMPTY()
 db.recipe.category.requires=IS_IN_DB(db,'category.id','category.name')
 db.recipe.created_by.readable = db.recipe.created_by.writable = False
 db.recipe.created_on.readable = db.recipe.created_on.writable = False
+db.recipe.image.requires=IS_NOT_EMPTY()
+
 
 db.comment.body.requires = IS_NOT_EMPTY()
 db.comment.recipe_id.readable = db.comment.recipe_id.writable = False
@@ -115,11 +118,11 @@ use_janrain(auth, filename='private/janrain.key')
 # auth.enable_record_versioning(db)
 from gluon.tools import Recaptcha
 auth.settings.captcha = Recaptcha(request,
-    '6LeMHf4SAAAAAPFtYkByaYn8PnfJ4RxC_WdRgHdN', '6LeMHf4SAAAAAAzuTPFGwVRAELrSxA2OF0f3L0XU')
+    '6Le-L_4SAAAAANxw1rmZehjdq3thYkGuAHb68u31', '6Le-L_4SAAAAAFCcpS1rC8KpqMezy1eib2wcEPU1')
 
 def captcha_field(request=request):
     w = lambda x,y: Recaptcha(request,
-                              '6LeMHf4SAAAAAPFtYkByaYn8PnfJ4RxC_WdRgHdN',
-                              '6LeMHf4SAAAAAAzuTPFGwVRAELrSxA2OF0f3L0XU')
+                              '6LcSNv4SAAAAAJEQoL3Xp1g84uGiuemlCRG9ynqi',
+                              '6LcSNv4SAAAAACp6iBq1bhP8DKroXZyaKCuG-U1k')
  
     return Field('captcha', 'string', label='Captcha', widget=w, default='ok')

@@ -10,7 +10,7 @@ jQuery('input[name="attachment"]:not(.processed)').multiUpload({
     mw_tooltip_removeGroupBtn:"{{=T('remove this file group')}}",
     mw_group_title:"{{=T('FILE GROUP')}}",
     mw_fileNumber:false,mw_maxElementAllowed:5});
-jQuery('#recipe_instructions').summernote({
+jQuery('#new_recipe textarea, #edit_recipe textarea').summernote({
   height: 300,                 // set editor height
 
   minHeight: null,             // set minimum height of editor

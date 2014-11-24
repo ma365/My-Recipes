@@ -37,16 +37,23 @@ possible_languages = read_possible_languages(abspath('applications', app))
 #in one of your models files:
 #   if request.uri_language: T.force(request.uri_language)
 
-default_application = "init"       
-default_controller = "default"
-default_function = "index" 
+# default_application = "init"
+# default_controller = "default"
+# default_function = "index"
 
 BASE =''
+
+routers = dict(
+    BASE = dict(
+        default_application = 'init',
+        default_controller = 'default',
+    ),
+)
 # routers = dict(
 #     BASE = dict(
-#         default_application = "wiki",       
+#         default_application = "wiki",
 #         default_controller = "default",
-#         default_function = "create",      
+#         default_function = "create",
 #         )
 
 # )

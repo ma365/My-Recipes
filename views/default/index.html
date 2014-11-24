@@ -7,21 +7,21 @@
 {{pass}}
 
 <h1>List all recipes</h1>
-{{=form}}
-<table>
+<div id="all_recipes" class="row">
 {{for recipe in records:}}
-<tr>
-<td>{{=A(recipe.title,_href=URL('show?id=%s'%recipe.id))}}</td>
-<td>{{=recipe.created_on}}</td>
-</tr>
-{{pass}}
-</table>
-{{=A('create new recipe',_href=URL('new_recipe'))}}
-<h2>
-    Contact Form
-</h2>
+    <div class="span3">
+     <a href="{{=URL('show', args=recipe.id)}}"><img src="{{=URL('download', args=recipe.image)}}" /></a>
+    <h5>{{=A(recipe.title,_href=URL('show', args=recipe.id))}}</h5>
+        <p>Created by {{=db.auth_user[recipe.created_by].first_name}} on {{=recipe.created_on}}</p>
 
-{{=LOAD('default','contactform.load',ajax=True)}}
+    </div>
+{{pass}}
+</div>
+<p>
+     {{=A('View all recipes',_href=URL('all_recipes'), _class="btn btn-primary")}}
+</p>
+
+<!-- {{=LOAD('default','contactform.load',ajax=True)}} -->
 
 
 {{block right_sidebar}}

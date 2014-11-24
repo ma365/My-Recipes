@@ -1,0 +1,12 @@
+{{extend 'layout.html'}}
+<h1>My Recipes</h1>
+<div id="all_recipes" class="row">
+{{for recipe in records:}}
+    <div class="span3">
+    <a href="{{=URL('show', args=recipe.id)}}"><img src="{{=URL('download', args=recipe.image)}}" /></a>
+    <h5>{{=A(recipe.title,_href=URL('show', args=recipe.id))}}</h5>
+        <p>Created by {{=db.auth_user[recipe.created_by].first_name}} on {{=recipe.created_on}}</p>
+
+    </div>
+{{pass}}
+</div>
